@@ -1,36 +1,29 @@
 import verify from "jsonwebtoken";
+import { authenticateRequest, clerkClient  } from "@clerk/express";
 import UserModel from "../models/user.model.js";
 
-export const middleware = async (req, res, next) => {
+export const ProtecteRoute = async (req, res, next) => {
+    if(!req.auth.userID){
+       return  res.status(400).json({success:false,message:'Unathorized - No Token Provided.'})
+    }
+    next();
 
-  
+}
+
+
+export const RequerAdmin  = async (req, res, next) => {
     try{
-        const token = req.cookies.token;
+        const currentUser = await clerkClient.users.getUser(req.auth.userID);
+        const isAdmin = process.env.ADMIN_CLERK_ID ===  currentUser.primaryEmailAddress?.emailAddress
 
-        if(!token){
-           return res.status(401).json({success:false,message:'Unathorized - No Token Provided.'})
+        if(!isAdmin){
+            res.status(403 ).json({success:false,message:'Unathorized - User is not Admin.'})
         }
 
-        const decode = jwt.verify(token,process.env.JWT_SECRET)
 
-        if(!decode) return res.status(401).json({success:false,message:'Unathorized - Token Invalid.'})
-      
-        const user = await UserModel.findById(decode.iduser).select("-password");
-
-        if (!user) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        req.iduser = user;
-
-   
-
-
-        next()
+        next();
 
     }catch(error){
-
-        console.log(error)
+        res.status(500).json({message:"Internal Server Error",error})
     }
-
 }

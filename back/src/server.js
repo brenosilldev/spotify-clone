@@ -1,6 +1,7 @@
 import  express  from "express";
 import dotenv from "dotenv";
 import cors from 'cors'
+import { clerkMiddleware} from "@clerk/express"
 
 import RouterAdmin from "./api/routes/admin.router.js";
 import RouterUser from "./api/routes/user.route.js";
@@ -24,7 +25,7 @@ app.use('/v1/auth', RouterAuth)
 app.use('/v1/songs', RouterSong)
 app.use('/v1/albums', RouterAlbum)
 app.use('/v1/stats', RouterState)
-
+app.use(clerkMiddleware({  }))
 
 app.use(cors({
     origin: 'http://localhost:5173',

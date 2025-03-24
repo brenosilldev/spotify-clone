@@ -1,9 +1,8 @@
 import { Router } from "express";
-import {getAllUsers,CreateUser} from "../controllers/user.controller.js"
 const RouterAuth = Router();
 
+import { callbackAuth  } from "../controllers/auth.controller.js";
 
-RouterAuth.get("/users",getAllUsers)
-RouterAuth.post("/user",CreateUser)
+RouterAuth.get("/callback",callbackAuth )
 
 export default RouterAuth

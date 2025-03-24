@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { ProtecteRoute, RequerAdmin } from "../middleware/middelware";
 
 const RouterSong = Router();
 
 
-RouterSong.get("/", (req, res) => {    
+RouterSong.post("/", (req, res) => {    
     res.send("admin");
 })
 
