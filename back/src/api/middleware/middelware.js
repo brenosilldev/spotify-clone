@@ -2,7 +2,7 @@ import verify from "jsonwebtoken";
 import { authenticateRequest, clerkClient  } from "@clerk/express";
 import UserModel from "../models/user.model.js";
 
-export const ProtecteRoute = async (req, res, next) => {
+ const ProtecteRoute = async (req, res, next) => {
     if(!req.auth.userID){
        return  res.status(400).json({success:false,message:'Unathorized - No Token Provided.'})
     }
@@ -11,7 +11,7 @@ export const ProtecteRoute = async (req, res, next) => {
 }
 
 
-export const RequerAdmin  = async (req, res, next) => {
+const RequerAdmin  = async (req, res, next) => {
     try{
         const currentUser = await clerkClient.users.getUser(req.auth.userID);
         const isAdmin = process.env.ADMIN_CLERK_ID ===  currentUser.primaryEmailAddress?.emailAddress
@@ -24,6 +24,10 @@ export const RequerAdmin  = async (req, res, next) => {
         next();
 
     }catch(error){
-        res.status(500).json({message:"Internal Server Error",error})
+        
+        next(error);
     }
 }
+
+
+export { ProtecteRoute, RequerAdmin}
