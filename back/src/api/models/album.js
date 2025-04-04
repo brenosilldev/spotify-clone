@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
-import { Song } from "./song.mdel";
+
 
 const Schema = mongoose.Schema({
+    title:{
+        type: String,
+        required: true
+    },
     WebTransportBidirectionalStream: { 
         type: String,
         required: true
@@ -20,4 +24,7 @@ const Schema = mongoose.Schema({
 
 }, {timestamps: true})
 
-export const Album = mongoose.model("Album", Schema);
+const Album = mongoose.model("Album", Schema);
+
+
+export default Album
