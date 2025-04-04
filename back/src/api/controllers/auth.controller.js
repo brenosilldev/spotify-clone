@@ -1,28 +1,22 @@
+import User from "../models/user.model.js";
 
-
-import {User}  from "../models/user.model.js";
-
-const  callbackAuth = async (req, res) => {
-
+const  callbackAuth = async (req, res,next) => {
     try{
-        const {id,name ,imageurl,email} = req.body
+        const { id, name, imageurl, email } = req.body;
+    
+        let user = await User.findOne({ clerkID: id });
 
-        const user = await User.find({clerkID:id})
-
-        if(!user){
-            const newUser = new User({
-                clerkID:id,
-                name,
-                email,
-                imageurl
-            })
-
-            const savedUser = await newUser.save()
-            res.status(200).json({success:true, message:"User Created",user:savedUser})
+        if (user) {
+            return res.status(200).json({ success: true, message: "User Found", user });
         }
 
+        const newUser = new User({ clerkID: id, name, email, imageurl });
+        user = await newUser.save();
+
+        res.status(201).json({ success: true, message: "User Created", user });
+
     }catch(error){
-        res.status(500).json({message:"Internal Server Error",error})
+        next(error)
     }
 
 }
