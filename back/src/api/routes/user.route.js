@@ -1,10 +1,9 @@
 import { Router } from "express";
 const RouterUser = Router();
+import { ProtecteRoute,RequerAdmin} from "../middleware/middelware.js";
+import {GetAllUsers} from "../controllers/user.controller.js";
 
-
-RouterUser.get("/callback", (req, res) => {    
-    res.json([{id: "1", name: "Usuário Exemplo", email: "usuario@exemplo.com"}]);
-});
+RouterUser.get("/users",ProtecteRoute,GetAllUsers);
 
 // Adicione mais rotas conforme necessário
 
