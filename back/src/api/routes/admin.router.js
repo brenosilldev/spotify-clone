@@ -1,9 +1,16 @@
 import { Router } from "express";
+import { CheckAdmin, CreateAlbum, CreateSong, DeleteAlbum, DeleteSong } from "../controllers/admin.controller.js";
+import { ProtecteRoute, RequerAdmin } from "../middleware/middelware.js";
+
 const RouterAdmin = Router();
-import { CreateSong } from "../controllers/admin.controller";
-import { ProtecteRoute, RequerAdmin } from "../middleware/middelware";
 
 
-RouterAdmin.get("/create_song", ProtecteRoute, RequerAdmin,CreateSong)
+RouterAdmin.use(ProtecteRoute,RequerAdmin)
 
-export default RouterAdmin
+RouterAdmin.get("/check_admin", CheckAdmin);
+RouterAdmin.post("/create_song", CreateSong);
+RouterAdmin.delete("/song/:id", DeleteSong);
+RouterAdmin.post("/album", CreateAlbum);
+RouterAdmin.delete("/album/:id", DeleteAlbum);
+
+export default RouterAdmin;
