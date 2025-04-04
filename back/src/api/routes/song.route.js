@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { ProtecteRoute, RequerAdmin } from "../middleware/middelware";
+import { ProtecteRoute, RequerAdmin } from "../middleware/middelware.js";
+import { GetAllSongs,GetRandomFeaturedSongs} from "../controllers/songs.controller.js";
 
 const RouterSong = Router();
 
 
-RouterSong.post("/", (req, res) => {    
-    res.send("admin");
-})
+RouterSong.get("/songs", ProtecteRoute,RequerAdmin,GetAllSongs)
+RouterSong.get("/featured", ProtecteRoute,RequerAdmin,GetRandomFeaturedSongs)
+RouterSong.get("/made-for-you", ProtecteRoute,RequerAdmin,GetRandomFeaturedSongs)
+RouterSong.get("/trending", ProtecteRoute,RequerAdmin,GetRandomFeaturedSongs)
 
 export default RouterSong
