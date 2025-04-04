@@ -1,6 +1,6 @@
 
 
-import {User}  from "../models/user.model.js";
+import User  from "../models/user.model.js";
 
 const CreateUser = async (req, res) => {
 
@@ -22,21 +22,22 @@ const CreateUser = async (req, res) => {
         }
 
     }catch(error){
-        res.status(500).json({message:"Internal Server Error",error})
+        next(error)
     }
 
 }
 
-const getAllUsers = async (req, res) => {
+const GetAllUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const currenteUserId = req.auth.userID
+        const users = await User.find({clerkID:{$ne:currenteUserId}})
         res.json(users);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error)
     }
 };
 
 
 
-export{ CreateUser, getAllUsers}
+export{ CreateUser, GetAllUsers}
