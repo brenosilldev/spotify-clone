@@ -44,7 +44,9 @@ app.use(fileUpload({
     createParentPath: true,
     limits: { fileSize: 10 * 1024 * 1024 }
 }));
+
 app.use((err, req, res, next) => {
+    
     console.error("Erro interno:", err);
     res.status(500).json({
         message: process.env.NODE_ENV === "production" ? "Internal Server Error" : err.message,
