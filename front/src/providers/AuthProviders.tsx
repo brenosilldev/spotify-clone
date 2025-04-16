@@ -27,7 +27,7 @@ const AuthProvider = ({children }: { children: React.ReactNode }) => {
                 updateApiToken(token);
 
 
-            }catch(erro:any){3
+            }catch(erro:any){
                 updateApiToken(null);
                console.log(erro) 
             }finally{

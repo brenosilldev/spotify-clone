@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 
 const Schema = mongoose.Schema({
-    name: {
+    title: {
         type: String,
         required: true
     },
@@ -10,7 +10,7 @@ const Schema = mongoose.Schema({
         type: String,
         required: true
     },
-    AudioUrl: {
+    audioUrl: {
         type: String,
         required: true
     },
@@ -21,9 +21,10 @@ const Schema = mongoose.Schema({
         type: String,
         required: true
     },  
-    year: {
+    
+    relaseYear: {
         type: String,
-        required: true
+        required: false
     },  
     views: {
         type: Number,

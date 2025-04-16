@@ -1,8 +1,9 @@
 import { Routes,Route } from "react-router-dom"
 import AuthCallback from "@/pages/auth-callback"
-import Home from "@/pages/home"
+import Home from "@/pages/home/Home"
 import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react"
 import MainLayout from "@/layout/MainLayout"
+import ChatPage from "@/pages/chat/ChatPage"
 
 export const CompoenentRoutes = () => {
 	return (
@@ -14,7 +15,7 @@ export const CompoenentRoutes = () => {
 
 				<Route element={<MainLayout/>}>
 					<Route path="/" element={<Home/>}/>
-
+					<Route path="/chat" element={<ChatPage/>}/>
 				</Route>
 			</Routes>
 		</div>

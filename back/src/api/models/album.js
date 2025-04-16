@@ -8,17 +8,18 @@ const Schema = mongoose.Schema({
     },
     WebTransportBidirectionalStream: { 
         type: String,
-        required: true
+        required: false
     },
     artist: {
         type: String,
         required: true
     },
-    Imageurl: {
+    imageUrl: {
         type: String,
         required: true
     },
-    relaseYear : { type:Number, required: true},
+    relaseYear : 
+    { type:Number, required: false},
     songs : [{type: mongoose.Schema.Types.ObjectId, ref: "Song"}]
 
 
