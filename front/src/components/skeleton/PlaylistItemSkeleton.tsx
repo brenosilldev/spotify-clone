@@ -1,7 +1,7 @@
 
 
 const PlaylistItemSkeleton = () => {
-    return Array.from({ length: 5 }, (_, index) => (
+    return Array.from({ length: 15 }, (_, index) => (
         <div
             key={index}
             className="p-2 rounded-md flex items-center gap-3"
