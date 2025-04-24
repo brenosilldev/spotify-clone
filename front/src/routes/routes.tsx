@@ -4,6 +4,7 @@ import Home from "@/pages/home/Home"
 import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react"
 import MainLayout from "@/layout/MainLayout"
 import ChatPage from "@/pages/chat/ChatPage"
+import Albums from "@/pages/albums"
 
 export const CompoenentRoutes = () => {
 	return (
@@ -16,6 +17,7 @@ export const CompoenentRoutes = () => {
 				<Route element={<MainLayout/>}>
 					<Route path="/" element={<Home/>}/>
 					<Route path="/chat" element={<ChatPage/>}/>
+					<Route path="/albums/:albumId" element={<Albums/>}/>
 				</Route>
 			</Routes>
 		</div>
