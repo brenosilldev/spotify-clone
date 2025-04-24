@@ -1,13 +1,23 @@
 import { cn } from '@/lib/utils'
-import { HomeIcon, Library, MessageCircle, Play } from 'lucide-react'
+import { HomeIcon, Library, MessageCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import PlaylistItemSkeleton from './skeleton/PlaylistItemSkeleton'
 import { SignedIn } from '@clerk/clerk-react'
 import { buttonVariants } from './ui/button'
+import {  useEffect } from 'react'
+import { useMusicStore } from '@/store/useMusicStore'
 
 const LeftSidebar = () => {
-    const isLoading = true
+
+    const { albums,isLoading,fetchAlbums } = useMusicStore();
+    // const [playlists, setPlaylists] = useState([])
+
+    console.log(albums)
+    useEffect(() => {
+        fetchAlbums()
+
+    }, [fetchAlbums])
 
     return (
         <div className="h-full flex flex-col gap-2 p-1">
@@ -46,8 +56,8 @@ const LeftSidebar = () => {
             <div className='rounded-lg bg-zinc-900 p-2'>
                 <div className='flex items-center justify-between mb-4'>
                     <div className='flex items-center text-white px-2'>
-                        <Library />
-                        <span className='ml-2'>Playlists</span>
+                        <Library className='mr-2 size-5' />
+                        <span className='hidden md:inline '>Playlists</span>
                     </div>
                 </div>
                 <ScrollArea className="h-[calc(100vh-300px)]">
@@ -56,10 +66,28 @@ const LeftSidebar = () => {
                         {isLoading  ?  (
                             <PlaylistItemSkeleton />
                         ) : (
-                            <div className='flex items-center text-white px-2'>
-                                <Play className='mr-2 size-5'/>
-                                <span className=''> Playlist 1</span>
-                            </div>
+   
+                            albums.map((album) => (
+                                <Link
+                                    key={album._id}
+                                    to={`/albums/${album._id}`}
+                                    // to={'#'}
+                                    className= "w-full p-2 hover:*:bg-zinc-800 rounded-md flex items-center text-white gap-3 cursor-pointer"
+                                                                            
+                                >
+                                    <img src={album.imageUrl} alt="playlist img" className='size-12 rounded-md flex-shrink-0' />
+                                    <div className='fle-1 min-w-0 hidden md:block'>
+                                        <p className='font-medium truncate'>{album.title}</p>
+                                        <p className='text-sm text-zinc-400 truncate'> Album: {album.artist}</p>
+
+
+                                    </div>
+
+                                    
+                                    
+                                </Link>
+                            ))	
+                       
                         )}
 
                         
