@@ -133,6 +133,9 @@ const songs = [
   },
 ];
 
+
+// Connect to MongoDB and seed the songs
+// Make sure to replace 'your_database_name' with your actual database name
 const seedSongs = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
