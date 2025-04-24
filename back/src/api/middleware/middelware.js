@@ -3,7 +3,7 @@ import { authenticateRequest, clerkClient  } from "@clerk/express";
 import UserModel from "../models/user.model.js";
 
  const ProtecteRoute = async (req, res, next) => {
-    if(!req.auth.userID){
+    if(!req?.auth?.userID){
        return  res.status(400).json({success:false,message:'Unathorized - No Token Provided.'})
     }
     next();
