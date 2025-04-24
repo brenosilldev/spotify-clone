@@ -1,5 +1,4 @@
 import {
-  ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
@@ -7,7 +6,7 @@ import {
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
 import { Outlet } from "react-router-dom";
-
+import Topbar from "@/components/Topbar"
 
 const MainLayout = () => {
 	
@@ -19,11 +18,12 @@ const MainLayout = () => {
 				<ResizablePanel defaultSize={20} minSize={isMobile ? 0 : 20} maxSize={30}>
 					<LeftSidebar />
 				</ResizablePanel>
-				<ResizableHandle />
+				
 				<ResizablePanel defaultSize={isMobile ? 80 : 60} >
+					<Topbar />
 					<Outlet />
 				</ResizablePanel>
-				<ResizableHandle />
+			
 				<ResizablePanel defaultSize={20} minSize={0} maxSize={25} collapsedSize={0}>
 					<RightSidebar  />
 					
