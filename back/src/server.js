@@ -30,15 +30,19 @@ app.use(cors({
 
 app.use(express.json({ limit: '50mb' })); 
 
+// app.use(ClerkExpressRequireAuth({}));
 
-app.use(clerkMiddleware({ 
-    publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
- }))
+app.use('/v1/songs', RouterSong)
+app.use('/v1/albums', RouterAlbum)
+
 app.use('/v1/users', RouterUser)
 app.use('/v1/admin', RouterAdmin)
 app.use('/v1/auth', RouterAuth)
-app.use('/v1/songs', RouterSong)
-app.use('/v1/albums', RouterAlbum)
+
+app.use(clerkMiddleware({ 
+    publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
+    apiKey: process.env.CLERK_API_KEY,
+}))
 app.use('/v1/stats', RouterState)
 
 
