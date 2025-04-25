@@ -3,9 +3,14 @@ import { authenticateRequest, clerkClient  } from "@clerk/express";
 import UserModel from "../models/user.model.js";
 
  const ProtecteRoute = async (req, res, next) => {
-    if(!req?.auth?.userID){
+    
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(" ")[1];
+
+    if(!token){
        return  res.status(400).json({success:false,message:'Unathorized - No Token Provided.'})
     }
+
     next();
 
 }
@@ -13,7 +18,15 @@ import UserModel from "../models/user.model.js";
 
 const RequerAdmin  = async (req, res, next) => {
     try{
-        const currentUser = await clerkClient.users.getUser(req.auth.userID);
+
+        const authHeader = req.headers.authorization;
+        const token = authHeader.split(" ")[1];
+
+        if(!token){
+            return  res.status(400).json({success:false,message:'Unathorized - No Token Provided.'})
+        }    
+
+        const currentUser = await clerkClient.users.getUser(token);
         const isAdmin = process.env.ADMIN_CLERK_ID ===  currentUser.primaryEmailAddress?.emailAddress
 
         if(!isAdmin){
