@@ -11,9 +11,7 @@ import { useMusicStore } from '@/store/useMusicStore'
 const LeftSidebar = () => {
 
     const { albums,isLoading,fetchAlbums } = useMusicStore();
-    // const [playlists, setPlaylists] = useState([])
 
-    console.log(albums)
     useEffect(() => {
         fetchAlbums()
 
