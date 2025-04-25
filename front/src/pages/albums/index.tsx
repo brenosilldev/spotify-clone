@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Clock, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export const formatDuration = (seconds: number) => {
+const formatDuration = (seconds: number) => {
 	const minutes = Math.floor(seconds / 60);
 	const remainingSeconds = seconds % 60;
 	return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
@@ -15,6 +15,7 @@ export const formatDuration = (seconds: number) => {
 
 
 const Albums = () => {
+     
     const { albumId } = useParams();
     const { fetchAlbumsId ,currenteAlbum} = useMusicStore()
 
@@ -34,11 +35,11 @@ const Albums = () => {
                 {/* Main Content */}
                 <div className='relative min-h-full'>
                     {/* bg gradient */}
-                    <div
-                        className='absolute inset-0 bg-gradient-to-b from-[#5038a0]/80 via-zinc-900/80
+                    <div className='absolute inset-0 bg-gradient-to-b from-[#5038a0]/80 via-zinc-900/80
                     to-zinc-900 pointer-events-none'
                         aria-hidden='true'
                     />
+
 
                     {/* Content */}
                     <div className='relative z-10'>
@@ -65,7 +66,7 @@ const Albums = () => {
                                 // onClick={handlePlayAlbum}
                                 size='icon'
                                 className='w-14 h-14 rounded-full bg-green-500 hover:bg-green-400 
-                hover:scale-105 transition-all'
+                                        hover:scale-105 transition-all'
                             >
                                 {/* {isPlaying && currentAlbum?.songs.some((song) => song._id === currentSong?._id) ? (
                                     <Pause className='h-7 w-7 text-black' />
@@ -80,7 +81,7 @@ const Albums = () => {
                             {/* table header */}
                             <div
                                 className='grid grid-cols-[16px_4fr_2fr_1fr] gap-4 px-10 py-2 text-sm 
-            text-zinc-400 border-b border-white/5'
+                      text-zinc-400 border-b border-white/5'
                             >
                                 <div>#</div>
                                 <div>Title</div>
@@ -105,10 +106,11 @@ const Albums = () => {
                     `}
                                             >
                                                 <div className='flex items-center justify-center'>
+                                                    <span className='group-hover:hidden'>{index + 1}</span>
+                                                    <Play className='h-4 w-4 hidden group-hover:block' />
                                                     {/* {isCurrentSong && isPlaying ? (
                                                         <div className='size-4 text-green-500'>♫</div>
                                                     ) : (
-                                                        <span className='group-hover:hidden'>{index + 1}</span>
                                                     )}
                                                     {!isCurrentSong && (
                                                         <Play className='h-4 w-4 hidden group-hover:block' />
