@@ -34,8 +34,7 @@ const RightSidebar = () => {
 							<div className='flex items-start gap-4'>
 								<div className='relative'>
 									<Avatar className='size-10 border border-zinc-800'>
-										<AvatarImage src={user.imageUrl} alt={user.name}   />
-										
+										<AvatarImage src={user.imageUrl} alt={user.name}/>										
 										<AvatarFallback>
 											{user.name}
 										</AvatarFallback>
@@ -46,30 +45,21 @@ const RightSidebar = () => {
 											<span>{user.name}</span>
 											{isPlaying &&  <Music className='size-4 text-esmerald-400 shrink-0' />}
 										</div>
-
 									</div>
-
 									{isPlaying ? (
 										<div className='mt-1'>
 											<div className='mt-1 text-sm font-medium truncate'>Cardigan</div>
 											<div className='text-xs text-zinc-400 truncate'>by Taylor Swift</div>
 										</div>
-
-									) : (
-										
+									) : (										
 										<div className='w-4 h-4 bg-emerald-400 rounded-full animate-pulse' />
 										
 									) }
-
 								</div>
-
 							</div>
-
 						</div>
 					))}
-
-				</div>
-				
+				</div>				
 			</ScrollArea>
 		</div>
 	)
