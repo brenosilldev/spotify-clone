@@ -18,7 +18,7 @@ import RouterAuth from "./api/routes/auth.router.js";
 
 
 const app = express();
-const port = 5000
+const port = process.env.PORT || 5000;
 dotenv.config();
 
 const _dirname = path.resolve();
