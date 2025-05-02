@@ -2,7 +2,7 @@ import api from "@/lib/Axios";
 import { useAuth } from "@clerk/clerk-react";
 import { Loader } from "lucide-react";
 import {  useEffect, useState } from "react";
-
+import {useUser} from "../store/useUser"
 
 const updateApiToken = (token:string | null)=>{
     if(token){
@@ -16,14 +16,23 @@ const updateApiToken = (token:string | null)=>{
 
 const AuthProvider = ({children }: { children: React.ReactNode }) => {
 
-    const {getToken,userId} = useAuth();
+    const {getToken} = useAuth();
     const  [loading,setLoading] = useState(true)
+    const {checkAdminStatus} = useUser()
+
 
     useEffect(() => {
         const initAuth = async()=>{
             try{
 
                 const token = await getToken();
+
+                if(token){
+
+                    await checkAdminStatus()
+                }
+
+
                 updateApiToken(token);
 
 
@@ -37,7 +46,7 @@ const AuthProvider = ({children }: { children: React.ReactNode }) => {
 
         initAuth()
         
-    },[getToken])
+    },[checkAdminStatus, getToken])
 
     if(loading){
          return(
