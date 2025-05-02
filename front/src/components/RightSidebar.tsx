@@ -18,7 +18,7 @@ const RightSidebar = () => {
 
 	
 	return (
-		<div className='h-full bg-zinc-900 rounded-lg flex flex-col gap-2 p-1'>
+		<div className='h-full bg-zinc-900 rounded-lg flex flex-col gap-2 m-1'>
 			<div className='p-4 flex justify-between items-center border-b border-zinc-800 '>
 				<div className='flex items-center gap-2'>
 					<Users className='size-5 shrink-0' />
@@ -32,7 +32,7 @@ const RightSidebar = () => {
 					{users.map((user) => (
 						<div className='cursor-pointer hove:bg-zinc-800/50 p-3 rounded-md transition-colors group' key={user._id}>
 							<div className='flex items-start gap-4'>
-								<div className='relative'>
+								<div className='flex '>
 									<Avatar className='size-10 border border-zinc-800'>
 										<AvatarImage src={user.imageUrl} alt={user.name}/>										
 										<AvatarFallback>
