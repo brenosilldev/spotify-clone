@@ -6,7 +6,6 @@ import {
 import LeftSidebar from "@/components/LeftSidebar";
 import RightSidebar from "@/components/RightSidebar";
 import { Outlet } from "react-router-dom";
-import Topbar from "@/components/Topbar"
 
 const MainLayout = () => {
 	
@@ -20,7 +19,7 @@ const MainLayout = () => {
 				</ResizablePanel>
 				
 				<ResizablePanel defaultSize={isMobile ? 80 : 60} >
-					<Topbar />
+					
 					<Outlet />
 				</ResizablePanel>
 			
