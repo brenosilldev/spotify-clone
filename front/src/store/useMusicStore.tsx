@@ -10,8 +10,15 @@ interface MusicStore {
     error: string | null,
     fetchAlbums: () => Promise<void>,   
     fetchAlbumsId: (id:string) => Promise<void>,   
-    // fetchSongs: () => Promise<void>
+    madeForYouSongs: songs[],
+    tredingSongs: songs[],
+    featuredSongs: songs[],
+    fetchFeaturedSongs: () => Promise<void>,
+    fetchTrendingSongs: () => Promise<void>,
+    fetchMadeForYouSongs: () => Promise<void>,
+
 }
+
 
 export const useMusicStore = create<MusicStore>((set) => ({
    albums: [],
@@ -19,6 +26,9 @@ export const useMusicStore = create<MusicStore>((set) => ({
    isLoading: true,
    currenteAlbum: null,
    error: null,
+   madeForYouSongs: [],
+   tredingSongs: [],
+   featuredSongs: [],
    fetchAlbums: async () => {
         set({ isLoading: true , error: null })
 
@@ -44,5 +54,43 @@ export const useMusicStore = create<MusicStore>((set) => ({
         }finally{
             set({ isLoading: false })
         }
+    },
+    fetchFeaturedSongs: async () => {
+        set({ isLoading: true , error: null })
+        try{
+            const response = await api.get('/songs/featured')
+            set({ featuredSongs: response.data })
+        }catch(error : any){
+            set({ error: error.response.data.message })
+        }finally{
+            set({ isLoading: false })
+        }
+    },
+    fetchMadeForYouSongs : async ()=>{
+        set({ isLoading: true , error: null })
+        try{
+            const response = await api.get('/songs/made_for_you')
+            set({ madeForYouSongs: response.data })
+            
+        }catch(error : any){
+            set({ error: error.response.data.message })
+        }finally{
+            set({ isLoading: false })
+        }   
+
+    },
+    fetchTrendingSongs : async ()=>{
+        set({ isLoading: true , error: null })
+        try{
+            const response = await api.get('/songs/trending')
+            console.log('response: ',response.data)
+            set({ tredingSongs: response.data })
+            
+        }catch(error : any){
+            set({ error: error.response.data.message })
+        }finally{
+            set({ isLoading: false })
+        }
+    
     }
 }))
