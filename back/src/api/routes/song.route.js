@@ -6,8 +6,8 @@ const RouterSong = Router();
 
 
 RouterSong.get("/songs", ProtecteRoute,RequerAdmin,GetAllSongs)
-RouterSong.get("/featured", ProtecteRoute,RequerAdmin,GetRandomFeaturedSongs)
-RouterSong.get("/made-for-you", ProtecteRoute,RequerAdmin,GetRandomFeaturedSongs)
-RouterSong.get("/trending", ProtecteRoute,RequerAdmin,GetRandomFeaturedSongs)
+RouterSong.get("/featured",GetRandomFeaturedSongs)
+RouterSong.get("/made-for-you",GetRandomFeaturedSongs)
+RouterSong.get("/trending",GetRandomFeaturedSongs)
 
 export default RouterSong
