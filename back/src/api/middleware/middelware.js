@@ -2,19 +2,14 @@ import verify from "jsonwebtoken";
 import { authenticateRequest, clerkClient  } from "@clerk/express";
 import UserModel from "../models/user.model.js";
 
- const ProtecteRoute = async (req, res, next) => {
-    
-    const authHeader = req.headers.authorization;
-    const token = authHeader.split(" ")[1];
+const ProtecteRoute = async (req, res, next) => {
+    const userId = req.auth.userId;
 
-    if(!token){
-       return  res.status(400).json({success:false,message:'Unathorized - No Token Provided.'})
-    }
-
-    next();
-
-}
-
+	if (!userId) {
+		return res.status(401).json({ message: "Unauthorized - you must be logged in" });
+	}
+	next();
+};
 
 const RequerAdmin  = async (req, res, next) => {
     try{
