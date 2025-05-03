@@ -29,8 +29,8 @@ const CreateUser = async (req, res) => {
 
 const GetAllUsers = async (req, res) => {
     try {
-        // const currenteUserId = req.auth.userID
-        const users = await User.find()
+        const currenteUserId = req.auth.userID
+        const users = await User.find({ clerkId: { $ne: currenteUserId } });
         res.json(users);
     } catch (error) {
         console.error(error);
