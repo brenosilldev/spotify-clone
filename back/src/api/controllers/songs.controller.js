@@ -13,7 +13,7 @@ const GetAllSongs = async (req, res,next) => {
 
 const GetRandomFeaturedSongs = async (req, res,next) => {    
     try {
-        const songs = await Song.aggrete([
+        const songs = await Song.aggregate([
             {$sample:{size:6}},
             {
                 $project: {
@@ -28,6 +28,7 @@ const GetRandomFeaturedSongs = async (req, res,next) => {
         ]);
 
         res.status(200).json(songs);
+        
     } catch (error) {
         next(error)
     }
