@@ -69,7 +69,7 @@ export const useMusicStore = create<MusicStore>((set) => ({
     fetchMadeForYouSongs : async ()=>{
         set({ isLoading: true , error: null })
         try{
-            const response = await api.get('/songs/made_for_you')
+            const response = await api.get('/songs/made-for-you')
             set({ madeForYouSongs: response.data })
             
         }catch(error : any){
