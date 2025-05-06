@@ -39,7 +39,7 @@ const Topbar = () => {
                     <SignOutButton />
                 </SignedIn> */}
 
-                <SignedOut>
+                <SignedOut >
                     <SingInOAtuhButtons />
                 </SignedOut>
 
