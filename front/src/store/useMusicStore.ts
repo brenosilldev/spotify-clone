@@ -83,7 +83,7 @@ export const useMusicStore = create<MusicStore>((set) => ({
         set({ isLoading: true , error: null })
         try{
             const response = await api.get('/songs/trending')
-            console.log('response: ',response.data)
+        
             set({ tredingSongs: response.data })
             
         }catch(error : any){
